@@ -1,58 +1,110 @@
-import React, { useState } from 'react'
-import "./signup.css"
-import {signup} from '../../api' 
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import './signup.css';
+import { signup } from '../../api';
+
+import PancakesImage from './undraw_pancakes_238t.svg';
 
 const Signup = () => {
-    const [input, setInput] = useState({})
-    console.log(input);
-    const handleChange = (e) => {
-        setInput((v) =>({
-            ...v,
-            [e.target.name]: e.target.value
-        }) )
-    };
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        console.log('handleSubmit', input);
-        try{
-            await signup(input);
+  const [input, setInput] = useState({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-        }
-        catch(err){
-            console.log('handleSubmitError', err);
-        }
+  const handleChange = (e) => {
+    setInput((prevInput) => ({
+      ...prevInput,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await signup(input);
+      setIsSubmitted(true);
+    } catch (err) {
+      console.log('handleSubmitError', err);
+      setIsSubmitted(false);
+    }
+  };
+
   return (
-    <div>
-        <form onSubmit={handleSubmit}>
-        <div className="signup">
-            <div className='inputes'>
-                <label>NAME</label>
-                <input type="" name='name' required= {true} onChange={handleChange} />
-            </div>
-            <div className='inputes'>
-                <label>EMAIL</label>
-                <input type="" name='email' required= {true} onChange={handleChange} />
-            </div>
-            <div className='inputes'>
-                <label>PHONE</label>
-                <input type="" name='phone' required= {true} onChange={handleChange}/>
-            </div>
-            <div className='inputes'>
-                <label>USERNAME</label>
-                <input type="" name='userName' required= {true} onChange={handleChange}/>
-            </div>
-            <div className='inputes'>
-                <label>PASSWORD</label>
-                <input type="" name='password' required= {true} onChange={handleChange}/>
-            </div>
-            
+    <div className="signup-container">
+      <header className="signup-header">
+        <h1>Todo App</h1>
+        <p>Create an account to manage your tasks and stay organized</p>
+      </header>
+      <div className="signup-content">
+        <div className="image-container">
+          <img src={PancakesImage} alt="Pancakes" className="image" />
         </div>
-        <button type="submit" style={{margin: '20px'}}>Submit</button>
+        <form className="signup-form" onSubmit={handleSubmit}>
+          <div className="input-container">
+            <label className="input-label">Name</label>
+            <input
+              type="text"
+              name="name"
+              className="input-field"
+              required
+              placeholder="Enter your name"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="input-container">
+            <label className="input-label">Email</label>
+            <input
+              type="email"
+              name="email"
+              className="input-field"
+              required
+              placeholder="Enter your email"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="input-container">
+            <label className="input-label">Phone</label>
+            <input
+              type="tel"
+              name="phone"
+              className="input-field"
+              required
+              placeholder="Enter your phone number"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="input-container">
+            <label className="input-label">Username</label>
+            <input
+              type="text"
+              name="userName"
+              className="input-field"
+              required
+              placeholder="Choose a username"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="input-container">
+            <label className="input-label">Password</label>
+            <input
+              type="password"
+              name="password"
+              className="input-field"
+              required
+              placeholder="Enter your password"
+              onChange={handleChange}
+            />
+          </div>
+          <button type="submit" className="submit-button">
+            Submit
+          </button>
         </form>
+      </div>
+      <div className="signup-footer">
+        <p>
+          Already have an account? <Link to="/user/login">Sign in</Link>
+        </p>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;

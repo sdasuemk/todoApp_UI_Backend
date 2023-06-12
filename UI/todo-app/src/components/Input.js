@@ -1,42 +1,55 @@
-import React, { useState } from "react";
-import ViewTodos from "./ViewTodos";
+import React, { useState } from 'react';
+import ViewTodos from './ViewTodos';
+import { postTodo } from '../api';
+import { RiAddFill } from 'react-icons/ri';
+import './input.css'; // Import the CSS file for styling
 
 const Input = () => {
-  const [formData, setFormData] = useState([]);
   const [newTodo, setNewTodo] = useState({
-    addTodo: "",
-    status: "notDone"
+    title: '',
+    completed: 'No',
   });
+  const [reloadTodo, setReloadTodo] = useState(false);
 
   const handleChange = (e) => {
     setNewTodo((v) => ({
       ...v,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("submit button is clicked.");
-    setFormData((v) => [...v, newTodo]);
+    console.log('submit button is clicked.');
+
+    try {
+      const addedTask = newTodo;
+      const response = await postTodo(addedTask);
+      setReloadTodo(response.data.received);
+      setNewTodo({
+        title: '',
+        completed: 'No',
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
-  const modTodos = (callback) => {
-    console.log("callback", typeof callback);
-    const afterDelete = formData.filter((item) => item.addTodo !== callback);
-    setFormData(afterDelete);
+
+  const resetReloadTodo = (callback) => {
+    setReloadTodo(callback);
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label> Add new todo: </label>
-        <input name="addTodo" onChange={handleChange} />
-        <button type="submit" style={{ marginLeft: "10px" }}>
-          {" "}
-          add{" "}
-        </button>
+    <div className="input-container">
+      <form onSubmit={handleSubmit} className="input-form">
+        <label className="input-label"> Create: </label>
+        <input name="title" onChange={handleChange} className="input-field" />
+        <button type="submit" className="hidden-button" />
+        <RiAddFill onClick={handleSubmit} className="add-icon" />
       </form>
-      <ViewTodos formData={formData} modTodos={modTodos} />
+      <ViewTodos reloadTodo={reloadTodo} resetReloadTodo={resetReloadTodo} />
     </div>
   );
 };
+
 export default Input;

@@ -1,0 +1,55 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Adjusted to move content closer to the bottom */
+  align-items: center;
+  height: 100vh;
+  color: #ffffff;
+  background-image: url('undraw_completed_tasks_vs6q.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.7
+  ); /* Adjust the transparency of the background color */
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 0.2rem; /* Adjust the margin to reduce space */
+  text-align: center;
+  mix-blend-mode: difference; /* Apply blend mode to invert the text color */
+}
+
+p {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem; /* Adjust the margin to reduce space */
+  text-align: center;
+  mix-blend-mode: difference; /* Apply blend mode to invert the text color */
+}
+
+.cta-button {
+  background-color: transparent;
+  color: #000000;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #1a1616;
+  color: #cbc6c6;
+}
+
+.vector-image {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 2rem;
+}

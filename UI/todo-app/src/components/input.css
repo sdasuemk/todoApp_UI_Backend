@@ -1,0 +1,33 @@
+.input-container {
+  position: relative;
+}
+
+.input-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  padding: 20px;
+}
+
+.input-label {
+  margin-right: 10px;
+}
+
+.input-field {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
+.hidden-button {
+  display: none;
+}
+
+.add-icon {
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  vertical-align: middle;
+  color: green;
+}
