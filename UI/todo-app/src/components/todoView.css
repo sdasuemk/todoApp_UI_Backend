@@ -1,0 +1,46 @@
+.todos-container {
+  display: flex;
+}
+
+.todos-column {
+  flex: 1;
+  margin: 10px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.item-content {
+  display: flex;
+  align-items: center;
+}
+
+.action-icons {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.action-icon {
+  cursor: pointer;
+  font-size: 24px;
+  margin-left: 10px;
+}
+
+.primary-color {
+  color: blue;
+}
+
+.danger-color {
+  color: red;
+}
+
+.success-color {
+  color: green;
+}
+.todos-column .cancel-color {
+  color: red;
+}

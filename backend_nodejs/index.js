@@ -2,6 +2,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 // imports - internal
 const todoRouter = require('./routers/todoRouter');
@@ -33,6 +34,7 @@ async function connectToMongoDB() {
 connectToMongoDB();
 
 // parse options
+app.use(cors());
 app.use(express.json());
 app.use('/todo', todoRouter);
 app.use('/user', userRouter);

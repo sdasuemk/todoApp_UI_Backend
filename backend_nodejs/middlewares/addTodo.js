@@ -23,7 +23,7 @@ const addTodo = async (req, res, next) => {
       }
     );
 
-    res.status(201).json({ newTodoWithUserId, newTodo });
+    res.status(201).json({ newTodoWithUserId, newTodo, received: true });
     console.log('Todo saved successfully');
   } catch (error) {
     console.error('Failed to create todo:', error);
